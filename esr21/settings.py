@@ -107,6 +107,8 @@ INSTALLED_APPS = [
     'esr21_labs.apps.AppConfig',
     'esr21_prn.apps.AppConfig',
     'esr21_subject.apps.AppConfig',
+    'esr21_pharmacy.apps.AppConfig',
+    'esr21_pharmacy_dashboard.apps.AppConfig',
     'esr21_metadata_rules.apps.AppConfig',
     'esr21_reference.apps.AppConfig',
     'esr21_visit_schedule.apps.AppConfig',
@@ -276,6 +278,9 @@ DASHBOARD_URL_NAMES = {
     'esr21_follow_booking_listboard_url': 'esr21_follow:esr21_follow_booking_listboard_url',
     'esr21_follow_book_listboard_url': 'esr21_follow:esr21_follow_book_listboard_url',
     'esr21_reports_home_url': 'esr21_reports:esr21_reports_home_url',
+    'esr21_pharma_dashboard_url': 'esr21_pharmacy_dashboard:esr21_pharmacy_home_url',
+    'pharma_requisitions_listboard': 'esr21_pharmacy_dashboard:pharma_requisitions_listboard',
+    'pharma_accountability_log_listboard': 'esr21_pharmacy_dashboard:accountability_log_listboard_url',
 
 }
 
@@ -293,7 +298,8 @@ DASHBOARD_BASE_TEMPLATES = {
     'esr21_follow_appt_listboard_template': 'esr21_follow/appointments_windows_listboards.html',
     'esr21_follow_booking_listboard_template': 'esr21_follow/bookings_listboard.html',
     'esr21_follow_book_listboard_template': 'esr21_follow/book_listboard.html',
-
+    'esr21_pharma_requisitions_listboard_template': 'esr21_pharmacy/requisitions/listboard.html',
+    'esr21_pharma_accountability_log_listboard_template': 'esr21_pharmacy/accountability_log/listboard.html',
 }
 
 # edc_facility

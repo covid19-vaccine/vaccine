@@ -46,6 +46,14 @@ esr21.append_item(
 
 esr21.append_item(
     NavbarItem(
+        name='pharmacy dashboard',
+        label=None,
+        fa_icon='fas fa-shopping-basket',
+        url_name='esr21_pharmacy_dashboard:home_url'
+    ))
+
+esr21.append_item(
+    NavbarItem(
         name='export data',
         label=None,
         fa_icon='fa-download',

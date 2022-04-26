@@ -37,6 +37,7 @@ from edc_sync_files.admin_site import edc_sync_files_admin
 from edc_visit_schedule.admin_site import edc_visit_schedule_admin
 from esr21_export.admin_site import esr21_export_admin
 
+from esr21_pharmacy.admin_site import esr21_pharmacy_admin
 from esr21_prn.admin_site import esr21_prn_admin
 from esr21_follow.admin_site import esr21_follow_admin
 from esr21_subject.admin_site import esr21_subject_admin
@@ -64,6 +65,7 @@ urlpatterns = [
     path('admin/', edc_sync_files_admin.urls),
 
     path('admin/', esr21_follow_admin.urls),
+    path('admin/', esr21_pharmacy_admin.urls),
     path('admin/', esr21_subject_admin.urls),
     path('admin/', esr21_prn_admin.urls),
     path('admin/', esr21_export_admin.urls),
@@ -109,6 +111,7 @@ urlpatterns = [
     path('edc_sync_files/', include('edc_sync_files.urls')),
 
     path('subject/', include('esr21_dashboard.urls')),
+    path('pharma/', include('esr21_pharmacy_dashboard.urls')),
 
     path('switch_sites/', LogoutView.as_view(next_page=settings.INDEX_PAGE),
          name='switch_sites_url'),
