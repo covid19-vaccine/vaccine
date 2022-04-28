@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     'edc_visit_schedule.apps.AppConfig',
     'edc_call_manager.apps.AppConfig',
     'edc_metadata_rules.apps.AppConfig',
+    'edc_sync_data_report.apps.AppConfig',
     'esr21_follow.apps.AppConfig',
     'esr21_export.apps.AppConfig',
     'esr21_dashboard.apps.AppConfig',
