@@ -108,7 +108,6 @@ urlpatterns = [
     path('edc_sync_files/', include('edc_sync_files.urls')),
 
     path('subject/', include('esr21_dashboard.urls')),
-    path('edc_meddra/', include('edc_meddra.urls')),
 
     path('switch_sites/', LogoutView.as_view(next_page=settings.INDEX_PAGE),
          name='switch_sites_url'),

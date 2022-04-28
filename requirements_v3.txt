@@ -52,6 +52,8 @@ git+https://github.com/covid19-vaccine/esr21-metadata-rules.git@version3.0-updat
 git+https://github.com/covid19-vaccine/esr21-reference.git@develop#esr21_reference
 git+https://github.com/covid19-vaccine/esr21-labs.git@develop#esr21_labs
 git+https://github.com/covid19-vaccine/esr21-reports.git@develop#esr21_reports
+git+https://github.com/covid19-vaccine/esr21-pharmacy-dashboard.git@develop#esr21-pharmacy-dashboard
+git+https://github.com/covid19-vaccine/esr21-pharmacy.git@develop#esr21-pharmacy
 django-autocomplete-light
 mysqlclient
 django-countries
