@@ -10,6 +10,7 @@ from esr21_reports.models import (
     VaccinationStatistics, DashboardStatistics, VaccinationEnrollments)
 from esr21_reports.views.enrollment_report_mixin import EnrollmentReportMixin
 from esr21_reports.views.psrt_mixins import DemographicsMixin
+from esr21_reports.views.psrt_mixins.summary_queries_mixin import PregnancySummaryMixin
 from esr21_reports.views.adverse_events import (
     AdverseEventRecordViewMixin, SeriousAdverseEventRecordViewMixin)
 from esr21_reports.views.psrt_mixins import ScreeningReportsViewMixin, StatsPerWeekMixin
@@ -32,6 +33,7 @@ class Command(BaseCommand):
         self.populate_demographics()
         self.populate_genaral_statistics()
         self.populate_vaccine_enrollments()
+        self.populate_pregnancy_statistics()
 
     def populate_age_graph(self):
         age_distribution = AgeDistributionGraphMixin()
@@ -101,6 +103,8 @@ class Command(BaseCommand):
                 enrollment.received_one_doses,
                 enrollment.received_two_doses,
                 enrollment.received_booster_doses,
+                enrollment.screening_for_second_dose,
+                enrollment.screening_for_booster_dose
         ]
 
         vaccinated_participants_json = json.dumps(vaccinated_participants)
@@ -158,7 +162,7 @@ class Command(BaseCommand):
 
     def populate_vaccine_enrollments(self):
         enrollment_report = EnrollmentReportMixin()
-        second_dose = enrollment_report.seond_dose_enrollments_elsewhere()
+        second_dose = enrollment_report.second_dose_enrollments_elsewhere()
         booster_dose = enrollment_report.booster_enrollment_elsewhere()
         doses = [second_dose, booster_dose]
         for dose in doses:
@@ -173,3 +177,16 @@ class Command(BaseCommand):
                 variable=dose[0],
                 defaults=defaults
             )
+            
+    def populate_pregnancy_statistics(self):
+       
+        preg_summary = PregnancySummaryMixin()
+        
+        preg_statistics_json = json.dumps(preg_summary.pregnancy_statistics)
+        
+            
+        DashboardStatistics.objects.update_or_create(
+                key='pregnancy_statistics',
+                value=preg_statistics_json
+        )
+
