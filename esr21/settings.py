@@ -304,11 +304,17 @@ PARENT_REFERENCE_MODEL2 = ''
 
 DEVICE_ID = config['edc_device'].get('device_id', '99')
 DEVICE_ROLE = config['edc_device'].get('role')
+
 SENAITE_USER = config['edc_senaite_interface'].get('senaite_user', '')
 SENAITE_PASS = config['edc_senaite_interface'].get('senaite_password', '')
-HOST = config['edc_senaite_interface'].get('senaite_host', '')
+SENAITE_HOST = config['edc_senaite_interface'].get('senaite_host', '')
 
 EDC_SYNC_SERVER_IP = config['edc_sync'].get('server_ip')
 EDC_SYNC_FILES_REMOTE_HOST = config['edc_sync_files'].get('remote_host')
 EDC_SYNC_FILES_USER = config['edc_sync_files'].get('sync_user')
 EDC_SYNC_FILES_USB_VOLUME = config['edc_sync_files'].get('usb_volume')
+
+# Celery configurations
+CELERY_TIMEZONE = 'Africa/Gaborone'
+CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_INCLUDE = ['esr21_reports.tasks', ]

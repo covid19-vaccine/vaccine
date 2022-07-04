@@ -24,7 +24,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         DashboardStatistics.objects.all().delete()
-        self.populate_age_graph()
         self.populate_screening_data()
         self.populate_enrollement_data()
         self.populate_vaccination_data()
@@ -35,33 +34,19 @@ class Command(BaseCommand):
         self.populate_vaccine_enrollments()
         self.populate_pregnancy_statistics()
 
-    def populate_age_graph(self):
-        age_distribution = AgeDistributionGraphMixin()
-        for site in self.siteHelper.sites_names:
-            site_id = self.siteHelper.get_site_id(site)
-            min, lowerquartile, median, upperquartile, max, site_outliers = age_distribution.get_distribution_site(site_id)
-            defaults = {
-                'min': min,
-                'lowerquartile': lowerquartile,
-                'median': median,
-                'upperquartile': upperquartile,
-                'max': max,
-                }
-            AgeStatistics.objects.update_or_create(
-                site=site,
-                defaults=defaults
-            )
-
     def populate_screening_data(self):
         screening = ScreeningGraphMixin()
         for site in self.siteHelper.sites_names:
             site_id = self.siteHelper.get_site_id(site)
-            passed, failed = screening.get_screened_by_site(site_id=site_id)
+            first_dose_screening = screening.first_dose_screening(site_id=site_id)
+            second_dose_screening = screening.second_dose_screening(site_id=site_id)
+            booster_dose_screening = screening.booster_dose_screening(site_id=site_id)
             ScreeningStatistics.objects.update_or_create(
                 site=site,
                 defaults={
-                    'passed': passed,
-                    'failed': failed
+                    'dose1': first_dose_screening,
+                    'dose2': second_dose_screening,
+                    'dose3': booster_dose_screening,
                 }
             )
         screening_mixin = ScreeningReportsViewMixin()
