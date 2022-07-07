@@ -66,3 +66,4 @@ openpyxl
 flexitext
 matplotlib
 tabulate
+orjson
