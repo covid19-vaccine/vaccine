@@ -1,7 +1,6 @@
 from django.apps import apps as django_apps
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from edc_base.utils import get_utcnow
 
 from edc_senaite_interface.classes import AnalysisResult
 
@@ -28,26 +27,25 @@ class Command(BaseCommand):
         authenticated = analysis_result.auth(
             settings.SENAITE_USER, settings.SENAITE_PASS)
 
-        requisition_idxs = self.subject_requisition_cls.objects.filter(
-            panel__name='sars_cov2_pcr').values_list(
-                'subject_visit__subject_identifier', 'subject_visit__visit_code')
-
+        results_created = 0
+        results_updated = 0
         if authenticated:
-            result = None
-            for requisition_idx in requisition_idxs:
-                result = analysis_result.get_results(
-                    participant_id=requisition_idx[0],
-                    visit_code=requisition_idx[1])
-                print('>>>', result)
+            results = analysis_result.get_pcr_results()
 
-                if result:
-                    try:
-                        subject_visit = self.subject_visit.objects.get(
-                            subject_identifier=requisition_idx[0],
-                            visit_code=requisition_idx[1],)
-                    except self.subject_visit.DoesNotExist:
-                        pass
-                    else:
-                        created, _ = self.covid19_results.objects.update_or_create(
-                            subject_visit=subject_visit,
-                            covid_result=result)
+            for result in results:
+                try:
+                    subject_visit = self.subject_visit.objects.get(
+                        subject_identifier=result.get('subject_identifier'),
+                        visit_code=result.get('visit_code'),
+                        visit_code_sequence=result.get('visit_code_sequence'))
+                except self.subject_visit.DoesNotExist:
+                    pass
+                else:
+                    created, _ = self.covid19_results.objects.update_or_create(
+                        subject_visit=subject_visit,
+                        defaults={'covid_result': result.get('covid_result')})
+                    if created:
+                        results_created += 1
+                    results_updated += 1
+        self.stdout.write(self.style.SUCCESS(f'Results created: {results_created}.'))
+        self.stdout.write(self.style.SUCCESS(f'Results updated: {results_updated}.'))
