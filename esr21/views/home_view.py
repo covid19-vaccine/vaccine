@@ -32,7 +32,7 @@ class HomeView(EdcBaseViewMixin, NavbarViewMixin, TemplateView):
         subject_screening = self.subject_screening_cls.objects.filter(
             site__id=settings.SITE_ID)
         subject_consent = self.subject_consent_cls.objects.filter(
-            site__id=settings.SITE_ID)
+            site__id=settings.SITE_ID).values('subject_identifier').distinct()
         vaccinated_first_dose = self.vaccine_model_cls.objects.filter(
             received_dose='Yes', received_dose_before='first_dose',
             site__id=settings.SITE_ID)
