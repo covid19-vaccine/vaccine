@@ -269,8 +269,6 @@ DASHBOARD_URL_NAMES = {
     'screening_listboard_url': 'esr21_dashboard:screening_listboard_url',
     'subject_listboard_url': 'esr21_dashboard:subject_listboard_url',
     'subject_dashboard_url': 'esr21_dashboard:subject_dashboard_url',
-    'protocol_deviations_listboard_url':'esr21_dashboard:protocol_deviations_listboard_url',
-    'note_to_file_listboard_url':'esr21_dashboard:note_to_file_listboard_url',
     'data_manager_listboard_url': 'edc_data_manager:data_manager_listboard_url',
     'export_listboard_url': 'esr21_export:export_listboard_url',
     'esr21_follow_listboard_url': 'esr21_follow:esr21_follow_listboard_url',
@@ -295,8 +293,6 @@ DASHBOARD_BASE_TEMPLATES = {
     'esr21_follow_appt_listboard_template': 'esr21_follow/appointments_windows_listboards.html',
     'esr21_follow_booking_listboard_template': 'esr21_follow/bookings_listboard.html',
     'esr21_follow_book_listboard_template': 'esr21_follow/book_listboard.html',
-    'protocol_deviations_listboard_template':'esr21_dashboard/deviations/listboard.html',
-    'note_to_file_listboard_template':'esr21_dashboard/notes/listboard.html',
 }
 
 # edc_facility
