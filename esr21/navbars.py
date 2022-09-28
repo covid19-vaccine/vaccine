@@ -57,19 +57,4 @@ esr21.append_item(
                fa_icon='fa-exchange',
                url_name='edc_sync:home_url'))
 
-# protocol deviations and  note to file
-esr21.append_item(
-    NavbarItem(
-        name='protocol_deviations',
-        label='Protocol Deviations',
-        fa_icon='far fa-user-circle',
-        url_name=settings.DASHBOARD_URL_NAMES.get('protocol_deviations_listboard_url')))
-
-esr21.append_item(
-    NavbarItem(
-        name='note_to_file',
-        label='Note to file',
-        fa_icon='far fa-user-circle',
-        url_name=settings.DASHBOARD_URL_NAMES.get('note_to_file_listboard_url')))
-
 site_navbars.register(esr21)
